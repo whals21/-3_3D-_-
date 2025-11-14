@@ -109,4 +109,10 @@ public class PlayerController : MonoBehaviour
         Vector3 spherePosition = transform.position - new Vector3(0, 1f, 0);
         Gizmos.DrawWireSphere(spherePosition, groundCheckDistance);
     }
+
+    // 외부에서 점프 강제 적용 (트램펄린용)
+    public void ForceJump(float force)
+    {
+        velocity.y = force;
+    }
 }

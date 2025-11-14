@@ -58,8 +58,11 @@ public class Package : MonoBehaviour
     {
         isCollected = true;
 
-        // GameManager에 수집 알림 (나중에 구현)
-        // GameManager.Instance.CollectPackage();
+        // GameManager에 수집 알림 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.CollectPackage();
+        }
 
         Debug.Log("Package Collected!");
 
@@ -74,6 +77,8 @@ public class Package : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(collectSound, transform.position);
         }
+
+        Debug.Log("Package Collected!");
 
         // 오브젝트 비활성화 (풀로 반환)
         gameObject.SetActive(false);

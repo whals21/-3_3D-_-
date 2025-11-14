@@ -170,5 +170,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetRange: 3
   magnetSpeed: 5
-  collectEffect: {fileID: 0}
+  collectEffect: {fileID: 6894066887262627937, guid: d750ad66c164f93468498cde60248530, type: 3}
   collectSound: {fileID: 0}
