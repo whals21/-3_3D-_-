@@ -1,0 +1,112 @@
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float sprintMultiplier = 1.5f;
+    [SerializeField] private float jumpForce = 8f;
+
+    [Header("Ground Check")]
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+
+    // Components
+    private CharacterController controller;
+
+    // Movement variables
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool canDoubleJump;
+
+    // Constants
+    private float gravity = -20f;
+
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+
+        // groundLayer를 Everything으로 설정 (나중에 Inspector에서 조정)
+        groundLayer = ~0;
+    }
+
+    void Update()
+    {
+        CheckGround();
+        Move();
+        Jump();
+        ApplyGravity();
+    }
+
+    void CheckGround()
+    {
+        // 캐릭터 발 위치에서 Raycast로 지면 체크
+        Vector3 spherePosition = transform.position - new Vector3(0, 1f, 0);
+        isGrounded = Physics.CheckSphere(spherePosition, groundCheckDistance, groundLayer);
+
+        // 땅에 닿으면 더블점프 리셋
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f; // 약간의 downward force
+            canDoubleJump = true;
+        }
+    }
+
+    void Move()
+    {
+        // WASD 입력 받기
+        float horizontal = Input.GetAxis("Horizontal"); // A, D
+        float vertical = Input.GetAxis("Vertical");     // W, S
+
+        // 이동 방향 계산
+        Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
+
+        // 달리기 체크 (Left Shift)
+        float currentSpeed = moveSpeed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed *= sprintMultiplier;
+        }
+
+        // CharacterController로 이동
+        controller.Move(moveDirection * currentSpeed * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        // Space 키 입력 체크
+        if (Input.GetButtonDown("Jump"))
+        {
+            // 지면에 있으면 일반 점프
+            if (isGrounded)
+            {
+                velocity.y = jumpForce;
+                canDoubleJump = true; // 더블점프 가능하게 설정
+            }
+            // 공중에 있고 더블점프 가능하면
+            else if (canDoubleJump)
+            {
+                velocity.y = jumpForce;
+                canDoubleJump = false; // 더블점프 사용
+                Debug.Log("Double Jump!");
+            }
+        }
+    }
+
+    void ApplyGravity()
+    {
+        // 중력 적용
+        velocity.y += gravity * Time.deltaTime;
+
+        // Y축 이동 적용
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    // Gizmos로 Ground Check 시각화 (Scene View에서만 보임)
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector3 spherePosition = transform.position - new Vector3(0, 1f, 0);
+        Gizmos.DrawWireSphere(spherePosition, groundCheckDistance);
+    }
+}
