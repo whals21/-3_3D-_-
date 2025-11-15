@@ -290,11 +290,11 @@ public class GrappleController : MonoBehaviour
 2. **Game View** 확인
 
 #### 5-2. 테스트 항목
-- [ ] 빌딩을 바라보고 **마우스 우클릭** → 갈고리 발사
-- [ ] 흰색 LineRenderer(로프)가 보이는가?
-- [ ] 플레이어가 빌딩 쪽으로 끌려가는가?
-- [ ] 가까워지면 자동으로 멈추는가?
-- [ ] 우클릭 떼거나 Space 누르면 갈고리 취소되는가?
+- [x] 빌딩을 바라보고 **마우스 우클릭** → 갈고리 발사
+- [x] 흰색 LineRenderer(로프)가 보이는가?
+- [x] 플레이어가 빌딩 쪽으로 끌려가는가?
+- [x] 가까워지면 자동으로 멈추는가?
+- [x] 우클릭 떼거나 Space 누르면 갈고리 취소되는가?
 
 #### 5-3. 문제 해결
 **문제 1**: 갈고리가 발사되지 않음
@@ -364,16 +364,16 @@ void UpdateRopeLine()
 
 ## ✅ Day 8-9 완료 체크리스트
 
-- [ ] GrappleController 스크립트 작성
-- [ ] Player에 GrappleController 추가
-- [ ] Line Renderer 추가 및 설정
-- [ ] 마우스 우클릭으로 갈고리 발사 확인
-- [ ] 로프 시각화 확인
-- [ ] 플레이어가 갈고리 지점으로 이동 확인
-- [ ] (선택) Building 레이어 생성 및 적용
+- [x] GrappleController 스크립트 작성
+- [x] Player에 GrappleController 추가
+- [x] Line Renderer 추가 및 설정
+- [x] 마우스 우클릭으로 갈고리 발사 확인
+- [x] 로프 시각화 확인
+- [x] 플레이어가 갈고리 지점으로 이동 확인
+- [x] (선택) Building 레이어 생성 및 적용
 - [ ] (선택) 갈고리 포인트 표시 오브젝트 배치
-- [ ] (선택) 로프 Material 개선
-- [ ] (선택) 로프 곡선 효과 추가
+- [x] (선택) 로프 Material 개선
+- [x] (선택) 로프 곡선 효과 추가
 
 ---
 
@@ -694,7 +694,7 @@ public class PlayerAnimationController : MonoBehaviour
 2. **Game View** 확인
 
 #### 9-2. 테스트 항목
-- [ ] 정지 시 Idle 애니메이션 재생
+- [x] 정지 시 Idle 애니메이션 재생
 - [ ] WASD로 이동 시 Run 애니메이션 재생
 - [ ] 점프 시 Jump 애니메이션 재생
 - [ ] 착지 시 다시 Idle/Run으로 전환
