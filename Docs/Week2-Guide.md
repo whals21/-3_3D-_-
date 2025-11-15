@@ -695,9 +695,9 @@ public class PlayerAnimationController : MonoBehaviour
 
 #### 9-2. 테스트 항목
 - [x] 정지 시 Idle 애니메이션 재생
-- [ ] WASD로 이동 시 Run 애니메이션 재생
-- [ ] 점프 시 Jump 애니메이션 재생
-- [ ] 착지 시 다시 Idle/Run으로 전환
+- [x] WASD로 이동 시 Run 애니메이션 재생
+- [x] 점프 시 Jump 애니메이션 재생
+- [x] 착지 시 다시 Idle/Run으로 전환
 
 #### 9-3. 문제 해결
 **문제 1**: 애니메이션이 안 나옴
@@ -744,17 +744,17 @@ public class PlayerAnimationController : MonoBehaviour
 
 ## ✅ Day 10-11 완료 체크리스트
 
-- [ ] Mixamo에서 캐릭터 다운로드
-- [ ] Mixamo에서 애니메이션 3종 다운로드 (Idle/Run/Jump)
-- [ ] Unity로 캐릭터 및 애니메이션 임포트
-- [ ] 캐릭터 Rig을 Humanoid로 설정
-- [ ] 애니메이션 Avatar 복사 및 설정
-- [ ] Player에 캐릭터 모델 추가
-- [ ] Animator Controller 생성
-- [ ] Animator State 및 Transition 구성
-- [ ] PlayerAnimationController 스크립트 작성
-- [ ] 애니메이션 정상 작동 확인
-- [ ] (선택) 조명 효과 추가
+- [x] Mixamo에서 캐릭터 다운로드
+- [x] Mixamo에서 애니메이션 3종 다운로드 (Idle/Run/Jump)
+- [x] Unity로 캐릭터 및 애니메이션 임포트
+- [x] 캐릭터 Rig을 Humanoid로 설정
+- [x] 애니메이션 Avatar 복사 및 설정
+- [x] Player에 캐릭터 모델 추가
+- [x] Animator Controller 생성
+- [x] Animator State 및 Transition 구성
+- [x] PlayerAnimationController 스크립트 작성
+- [x] 애니메이션 정상 작동 확인
+- [x] (선택) 조명 효과 추가
 - [ ] (선택) 파티클 효과 추가
 
 ---
