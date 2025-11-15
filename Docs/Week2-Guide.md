@@ -599,6 +599,23 @@ void UpdateRopeLine()
    - **Has Exit Time**: ✅ 체크 (애니메이션 끝나면 자동 전환)
    - **Exit Time**: `0.9`
 
+**Jump → Fall** (공중에서 낙하 시):
+1. `Jump` → `Fall` Transition 생성
+2. **Inspector**:
+   - **Has Exit Time**: ✅ 체크
+   - **Exit Time**: `0.7` (점프 애니메이션 70% 지점)
+   - **Transition Duration**: `0.2`
+   - **Conditions**: `IsFalling` `true`
+
+**Fall → Idle** (착지):
+1. `Fall` → `Idle` Transition 생성
+2. **Inspector**:
+   - **Has Exit Time**: ❌ 체크 해제
+   - **Transition Duration**: `0.1`
+   - **Conditions**: `IsFalling` `false`
+
+**참고**: Falling 애니메이션은 선택사항이므로, 구현하지 않았다면 위 Transition은 건너뛰어도 됩니다.
+
 ---
 
 ### 8단계: PlayerAnimationController 스크립트 작성
@@ -736,9 +753,62 @@ public class PlayerAnimationController : MonoBehaviour
    - **Play On Awake**: ❌
    - **Duration**: `0.3`
    - **Start Color**: 흰색/회색
+   - **Start Size**: `0.5`
+   - **Start Lifetime**: `0.5`
+   - **Emission** → **Rate over Time**: `0`
+   - **Emission** → **Bursts**: **+** 클릭
+     - **Time**: `0`
+     - **Count**: `20` (한 번에 20개 파티클)
    - **Shape**: Circle
+     - **Radius**: `1`
 
-나중에 PlayerController에서 착지 시 `landingEffect.Play()` 호출
+4. **PlayerController.cs**에 착지 감지 코드 추가:
+
+```csharp
+[Header("Effects")]
+[SerializeField] private ParticleSystem landingEffect;
+
+// 클래스 상단에 변수 추가
+private bool wasGrounded = false;
+
+void Update()
+{
+    CheckGround();
+    Move();
+    Jump();
+    ApplyGravity();
+
+    // ===== 착지 감지 및 파티클 재생 =====
+    CheckLanding();
+    // ==================================
+}
+
+void CheckLanding()
+{
+    // 이전 프레임에는 공중이었고, 현재 프레임에 착지했다면
+    if (!wasGrounded && isGrounded)
+    {
+        // 착지 파티클 재생
+        if (landingEffect != null)
+        {
+            landingEffect.Play();
+        }
+
+        Debug.Log("착지!");
+    }
+
+    // 현재 상태 저장 (다음 프레임에서 비교용)
+    wasGrounded = isGrounded;
+}
+```
+
+5. **Unity Inspector**에서:
+   - `Player` 선택
+   - **PlayerController** 컴포넌트 → **Landing Effect** 필드
+   - `LandingEffect` 파티클 시스템 드래그
+
+6. **테스트**:
+   - Play 실행 → 점프 → 착지 시 파티클 효과 확인
 
 ---
 
